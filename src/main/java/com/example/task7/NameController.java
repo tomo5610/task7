@@ -18,16 +18,13 @@ public class NameController {
         return new Name("tomoyasu", 1);
     }
 
-
     @PostMapping("/name")
-
     public ResponseEntity<Map<String, String>> create(@RequestBody CreateForm form) {
         URI url = UriComponentsBuilder.fromUriString("http://localhost:8080")
                 .path("/name")
                 .build()
                 .toUri();
         return ResponseEntity.created(url).body(Map.of("message", "name successfully created"));
-
     }
 
     @PatchMapping("/name/{id}")
@@ -36,7 +33,7 @@ public class NameController {
     }
 
     @DeleteMapping("/name/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") int deleteId) {
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Map<String, String>> delete(@PathVariable("id") int id) {
+        return ResponseEntity.ok(Map.of("message", "name successfully deleted"));
     }
 }
